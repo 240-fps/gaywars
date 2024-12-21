@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gay Wars</title>
+<style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #b2fefa, #0ed2f7);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        h1 {
+            color: #2a4d69;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #333;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+        }
+        .scenario {
+            margin: 20px auto;
+            padding: 20px;
+            border: 2px solid #0ed2f7;
+            border-radius: 15px;
+            max-width: 600px;
+            background-color: #ffffff;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .scenario p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+        button {
+            background-color: #0ed2f7;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+        button:hover {
+            background-color: #06b1d1;
+            transform: scale(1.05);
+        }
+    
+body {
+    text-align: center; /* Ensure all text is centered */
+}
+
+.scenario p {
+    color: rgba(51, 51, 51, 0.7); /* Add translucency to the text */
+}
+</style>
+</head>
+<body>
+<h1>Welcome to Gay Wars!</h1>
+<h2>Generate a random battle scenario!</h2>
+<div class="scenario">
+<p id="scenario-text">Click the button to get started!</p>
+</div>
+<button onclick="generateScenario()">Generate Scenario</button>
+<script src="gaywars.js"></script>
+<script>
+// Data arrays
+const characterCards = [
+    "Mason", "Shunty", "Precious", "Uh...Matty", "Farnold", "Belb", "James Charles",
+    "Trisha Paytas", "a squad of cockroaches", "hummingbird", "pizza delivery guy", "Steven Hawking",
+    "Serena Williams", "LeBron James", "SpongeBob", "Matt (black bald Wii man)", "Gnome on Shrooms",
+    "Jungkook", "Pterodactyl", "Katniss Everdeen", "Boss Baby", "Shartiqua", "A Pebble",
+    "Hello Kitty", "Deadpool", "The Rock", "Cooking Mama", "Finance Bro", "Megamind",
+    "Thor", "Gordon Ramsey", "Spoiled Kid", "DJ Khaled", "Gym Bro", "Hulk",
+    "Adam Sandler", "Princess Peach", "Shrek", "Pennywise", "Keanu Reeves", "John Cena",
+    "The KoolAid Man", "Mr. Clean", "Napoleon Bonaparte", "Elon Musk", "Forest Gump"
+];
+
+const descriptiveCards = [
+    "white", "black", "lesbian", "Hispanic", "4 ft tall", "has an extra nipple", "medusa hair",
+    "gills", "can summon rain storms", "pees out of their pinky finger", "can only crawl",
+    "made out of Legos", "contagious autism", "really good at throwing cards", "just got out of rehab",
+    "on shrooms", "can knock people out with their farts", "8 ft tall", "if they were from the Stone Age",
+    "can fly with coochie flappers", "can birth an AK-47 rifle", "breastmilk elixir of life",
+    "morbidly obese", "gay on command", "missing its big toe", "can sing and eat simultaneously",
+    "master of networking", "beautiful", "Rubik's Cube Fanatic", "skips everywhere",
+    "can solve your calculus III problems", "ultimate gaslighter", "can eat raw chicken",
+    "adopted by Nigerian homophobics", "flamboyant as heck", "can majestically whip and nae nae"
+];
+
+const environments = [
+    "Body Building", "Inside a Wormhole", "Hot Pepper Eating Contest", 
+    "Super Smash Brawl Arena", "Patrick's Rock Home", "Inside a Watermelon", "Barbie's Home",
+    "Vacant Office Room", "Parking Garage", "Hogwarts", "Gay Club", "Cheesecake Factory",
+    "Cooking Mama's Kitchen", "Karaoke Room", "Strip Club", "The Batmobile"
+];
+
+const competitions = [
+    "Dance Battle", "Try Not to Kiss Challenge", "Hunger Games", "Hot Dog Eating",
+    "Try Not to Cringe", "40-Yard Dash", "Solve the Rubik's Cube", "Wii Tennis",
+    "Mass Eating", "Who Would Make a More Viral Thirst Trap", "Survive a Zombie Apocalypse",
+    "Would Not Crack Under Interrogation", "Trivia", "Karaoke"
+];
+
+// Function to generate a random scenario ensuring no duplicate cards
+function generateScenario() {
+    const getRandomIndex = (array) => Math.floor(Math.random() * array.length);
+
+    // Ensure unique characters and descriptions
+    let char1Index, char2Index, desc1Index, desc2Index;
+    do {
+        char1Index = getRandomIndex(characterCards);
+        char2Index = getRandomIndex(characterCards);
+    } while (char1Index === char2Index);
+
+    do {
+        desc1Index = getRandomIndex(descriptiveCards);
+        desc2Index = getRandomIndex(descriptiveCards);
+    } while (desc1Index === desc2Index);
+
+    const character1 = characterCards[char1Index];
+    const character2 = characterCards[char2Index];
+    const descriptive1 = descriptiveCards[desc1Index];
+    const descriptive2 = descriptiveCards[desc2Index];
+    const environment = environments[getRandomIndex(environments)];
+    const competition = competitions[getRandomIndex(competitions)];
+
+    const scenarioText = `${character1} (${descriptive1}) vs ${character2} (${descriptive2})<br>
+    Environment: ${environment}<br>Competition: ${competition}`;
+    
+    document.getElementById("scenario-text").innerHTML = scenarioText;
+}
+</script></body>
+</html>
